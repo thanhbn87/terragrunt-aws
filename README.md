@@ -1,2 +1,2 @@
 # terragrunt-aws
-Terragrunt modules for aws
+AWS Terrform modules for Terragrunt
