@@ -18,7 +18,7 @@ locals {
 //     S3    //
 ///////////////
 resource "aws_s3_bucket" "this" {
-  bucket = "${lower(var.project_env_short)}-${lower(var.name)}-${lower(var.domain_name)}"
+  bucket = "${lower(var.project_env_short)}-${lower(var.type)}-${lower(var.domain_name)}"
   acl    = "${var.acl}"
   tags   = "${merge(local.common_tags, var.tags)}"
 }
