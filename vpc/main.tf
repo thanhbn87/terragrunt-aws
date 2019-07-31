@@ -23,7 +23,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "1.67.0"
 
-  name = "${var.project_env}-${var.project_name}"
+  name = "${var.vpc_name == "" ? "${var.project_env}-${var.project_name}" : "${var.vpc_name}" }"
   cidr = "${var.vpc_cidr}"
 
   enable_dns_hostnames    = "${var.enable_dns_hostnames}"
