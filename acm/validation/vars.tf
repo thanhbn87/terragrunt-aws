@@ -6,6 +6,7 @@ variable "aws_region" { default = "us-west-2" }
 variable "aws_profile" { default = "default" }
 
 variable "domain_name" { default = "example.com" }
+variable "cdn_cert" { default = false }
 
 variable "tags" {
   default = {}

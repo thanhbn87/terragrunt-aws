@@ -1,5 +1,5 @@
 provider "aws" {
-  region  = "${var.aws_region}"
+  region  = "${var.cdn_cert ? "us-east-1" : "${var.aws_region}" }"
   profile = "${var.aws_profile}"
 }
 
@@ -35,6 +35,7 @@ resource "aws_route53_record" "cert_validation" {
   zone_id = "${data.aws_route53_zone.cert.id}"
   records = ["${aws_acm_certificate.cert.domain_validation_options.0.resource_record_value}"]
   ttl     = 60
+  allow_overwrite   = true
 }
 
 resource "aws_acm_certificate_validation" "cert" {
