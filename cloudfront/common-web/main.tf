@@ -87,3 +87,32 @@ resource "aws_cloudfront_distribution" "this" {
 
   custom_error_response = ["${var.custom_error_response}"]
 }
+
+data "aws_iam_policy_document" "s3_policy" {
+  provider = "aws.s3"
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${data.aws_s3_bucket.this.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.this.iam_arn}"]
+    }
+  }
+
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["${data.aws_s3_bucket.this.arn}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.this.iam_arn}"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "this" {
+  provider = "aws.s3"
+  bucket = "${data.aws_s3_bucket.this.id}"
+  policy = "${data.aws_iam_policy_document.s3_policy.json}"
+}
