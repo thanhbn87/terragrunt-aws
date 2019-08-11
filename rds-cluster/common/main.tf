@@ -76,7 +76,8 @@ module "aurora" {
   security_groups = ["${data.aws_security_group.db.id}"]
   subnets         = ["${data.terraform_remote_state.vpc.database_subnets}"]
 
-  cluster_parameters = ["${var.cluster_parameters}"]
+  cluster_parameters  = ["${var.db_cluster_parameters}"]
+  instance_parameters = ["${var.db_instance_parameters}"]
 
   # Encrypt:
   storage_encrypted  = "${var.storage_encrypted}"

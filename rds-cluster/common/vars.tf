@@ -21,7 +21,8 @@ variable "db_name" { default = "demo" }
 variable "db_user" { default = "demo_user" }
 variable "db_password" { default = "Demo_Pass19" }
 variable "db_instance_type" { default = "db.t3.small" }
-variable "cluster_parameters" { default = [] }
+variable "db_cluster_parameters" { default = [] }
+variable "db_instance_parameters" { default = [] }
 
 variable "storage_encrypted" { default = false }
 variable "kms_key_arn" { default = "" }
