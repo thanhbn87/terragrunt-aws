@@ -32,6 +32,7 @@ variable "rds_monitoring_role_arn" { default = "" }
 variable "db_enhanced_monitoring" { default = true }
 variable "rds_monitoring_interval" { default = "0" }
 variable "db_enabled_cloudwatch_logs_exports" { default = ["error","general","slowquery"] }
+variable "db_auto_minor_version_upgrade" { default = false }
 
 variable "dns_private" { default = true }
 variable "domain_local" { default = "local" }

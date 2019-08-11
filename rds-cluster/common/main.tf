@@ -29,7 +29,7 @@ locals {
     Name = "${var.project_name}"
   }
 
-  rds_monitoring_role_arn = "${var.db_enhanced_monitoring && var.rds_monitoring_role_arn == "" ? aws_iam_role.enhanced_monitoring.arn : var.rds_monitoring_role_arn }"
+  rds_monitoring_role_arn = "${var.db_enhanced_monitoring && var.rds_monitoring_role_arn == "" ? element(concat(aws_iam_role.enhanced_monitoring.*.arn,list("")),0) : var.rds_monitoring_role_arn }"
   rds_monitoring_interval = "${var.db_enhanced_monitoring && var.rds_monitoring_interval == 0 ? 60 : var.rds_monitoring_interval }"
 }
 
@@ -60,7 +60,7 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 # main module:
 module "aurora" {
   source  = "thanhbn87/rds-cluster/aws"
-  version = "0.15.1"
+  version = "0.15.2"
 
   engine          = "${var.db_engine}"
   cluster_family  = "${var.db_cluster_family}"
@@ -93,6 +93,9 @@ module "aurora" {
 
   # Log to cloudwatch:
   enabled_cloudwatch_logs_exports = "${var.db_enabled_cloudwatch_logs_exports}"
+
+  # Minor update:
+  auto_minor_version_upgrade = "${var.db_auto_minor_version_upgrade}"
 }
 
 ## DNS local:
