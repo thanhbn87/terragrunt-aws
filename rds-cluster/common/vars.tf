@@ -12,7 +12,6 @@ variable "tfstate_arn" { default = "" }
 variable "tfstate_key_vpc" { default = "demo/vpc/terraform.tfstate" }
 
 variable "namespace" { default = "" }
-variable "name" { default = "" }
 variable "source_db_sg_tags" { default = { Type = "Database" } }
 variable "db_cluster_size" { default = "1" }
 variable "db_engine" { default = "aurora-mysql" }
