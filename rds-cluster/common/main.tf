@@ -59,8 +59,8 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 
 # main module:
 module "aurora" {
-  source  = "thanhbn87/rds-cluster/aws"
-  version = "0.15.2"
+  source  = "github.com/thanhbn87/terraform-aws-rds-cluster.git?ref=common"
+  //version = "0.15.2"
 
   engine          = "${var.db_engine}"
   cluster_family  = "${var.db_cluster_family}"
