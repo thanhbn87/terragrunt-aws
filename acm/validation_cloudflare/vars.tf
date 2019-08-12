@@ -9,6 +9,8 @@ variable "cf_token" {}
 
 variable "domain_name" { default = "example.com" }
 variable "root_domain" { default = "example.com" }
+variable "subject_name" { default = "" }
+variable "subject_alternative_names" { default = [] }
 variable "cdn_cert" { default = false }
 
 variable "tags" {

@@ -17,14 +17,17 @@ locals {
     Env  = "${var.project_env}"
     Name = "${var.project_env}-${var.project_name}"
   }
+
+  subject_name              = "${var.subject_name == "" ? var.domain_name : var.subject_name }"
+  subject_alternative_names = [ "${split(",", length(var.subject_alternative_names) == 0 ? join(",", list("*.${var.domain_name}")) : join(",", var.subject_alternative_names))}" ]
 }
 
 ///////////////////////////////////
 //            Certs              //
 ///////////////////////////////////
 resource "aws_acm_certificate" "cert" {
-  domain_name = "${var.domain_name}"
-  subject_alternative_names = ["*.${var.domain_name}"]
+  domain_name = "${local.subject_name}"
+  subject_alternative_names = ["${local.subject_alternative_names}"]
   validation_method = "DNS"
   tags = "${merge(local.common_tags, var.tags)}"
 }
