@@ -12,6 +12,7 @@ variable "root_domain" { default = "example.com" }
 variable "subject_name" { default = "" }
 variable "subject_alternative_names" { default = [] }
 variable "cdn_cert" { default = false }
+variable "cloudflare_record" { default = true }
 
 variable "tags" {
   default = {}

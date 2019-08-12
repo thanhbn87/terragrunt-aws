@@ -33,6 +33,7 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "cloudflare_record" "cert_validation" {
+  count  = "${var.cloudflare_record ? 1 : 0}"
   domain = "${var.root_domain}"
   name   = "${aws_acm_certificate.cert.domain_validation_options.0.resource_record_name}"
   value  = "${aws_acm_certificate.cert.domain_validation_options.0.resource_record_value}"
@@ -41,6 +42,7 @@ resource "cloudflare_record" "cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "cert" {
+  count  = "${var.cloudflare_record ? 1 : 0}"
   certificate_arn         = "${aws_acm_certificate.cert.arn}"
   validation_record_fqdns = ["${cloudflare_record.cert_validation.hostname}"]
 }
