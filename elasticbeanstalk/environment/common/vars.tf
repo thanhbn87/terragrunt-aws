@@ -29,6 +29,7 @@ variable "tfstate_arn" { default = "" }
 variable "tfstate_key_vpc" { default = "demo/vpc/terraform.tfstate" }
 
 variable "webapp_in_public" { default = false }
+variable "app_name" { default = "" }
 
 ## from: https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment/blob/0.13.0/variables.tf
 variable "namespace" {
