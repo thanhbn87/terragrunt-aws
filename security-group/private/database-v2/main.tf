@@ -41,7 +41,7 @@ module "security_group" {
   version = "2.17.0"
 
   use_name_prefix = false
-  name            = "${lower(var.project_env_short)}-${lower(var.name)}"
+  name            = "${var.namespace == "" ? "" : "${var.namespace}-"}${lower(var.project_env_short)}-${lower(var.name)}"
   description     = "${var.description}"
   vpc_id          = "${data.aws_vpc.vpc.id}"
 

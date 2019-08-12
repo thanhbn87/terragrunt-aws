@@ -5,6 +5,7 @@ variable "project_env_short" { default = "prd" }
 variable "aws_region" { default = "us-west-2" }
 variable "aws_profile" { default = "default" }
 
+variable "namespace" { default = "" }
 variable "name" { default = "security-group" }
 variable "description" { default = "This is a security group for Database access" }
 variable "vpc_name" { default = "default" }
