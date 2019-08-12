@@ -8,6 +8,7 @@ variable "cf_email" { default = "admin@example.com" }
 variable "cf_token" {}
 
 variable "domain_name" { default = "example.com" }
+variable "root_domain" { default = "example.com" }
 variable "cdn_cert" { default = false }
 
 variable "tags" {
