@@ -15,7 +15,7 @@ terraform {
 locals {
   common_tags = {
     Env  = "${var.project_env}"
-    Name = "${var.project_name}"
+    Name = "${var.project_env}-${var.project_name}"
   }
 }
 
