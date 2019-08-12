@@ -23,19 +23,19 @@ output "database_subnets" {
 # ssh key:
 output "key_name" {
   description = "The SSH key name"
-  value       = "${element(compact(concat(aws_key_pair.key_ssh.*.key_name,list(""))),0)}"
+  value       = "${element(concat(aws_key_pair.key_ssh.*.key_name,list("")),0)}"
 }
 
 
 # route53:
 output "private_zone_id" {
   description = "The ID of the Route53 private zone"
-  value       = "${element(compact(concat(aws_route53_zone.private.*.zone_id,list(""))),0)}"
+  value       = "${element(concat(aws_route53_zone.private.*.zone_id,list("")),0)}"
 }
 
 output "public_zone_id" {
   description = "The ID of the Route53 public zone"
-  value       = "${element(compact(concat(aws_route53_zone.public.*.zone_id,list(""))),0)}"
+  value       = "${element(concat(aws_route53_zone.public.*.zone_id,list("")),0)}"
 }
 
 output "public_name_servers" {
