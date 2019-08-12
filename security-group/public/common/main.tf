@@ -10,7 +10,6 @@ terraform {
 data "aws_vpc" "vpc" {
   tags {
     Name      = "${var.vpc_name}"
-    Namespace = "${var.namespace}"
   }
 }
 
@@ -36,5 +35,5 @@ module "security_group" {
   egress_with_cidr_blocks       = "${var.egress_with_cidr_blocks}"
   egress_with_ipv6_cidr_blocks  = "${var.egress_with_ipv6_cidr_blocks}"
 
-  tags = "${merge(var.tags, map("Env", "${var.project_env}"))}"
+  tags = "${merge(var.tags, map("Env", "${var.project_env}", "Namespace", "${var.namespace}"))}"
 }
