@@ -62,7 +62,7 @@ data "aws_security_group" "ec2" {
 
 module "ec2" {
   source  = "thanhbn87/ec2-bastion/aws"
-  version = "0.1.0"
+  version = "0.1.1"
 
   name          = "${var.name}"
   namespace     = "${var.namespace}"
@@ -77,7 +77,6 @@ module "ec2" {
   vpc_security_group_ids      = ["${data.aws_security_group.ec2.id}"]
   subnet_id                   = ["${local.subnet_id}"]
   iam_instance_profile        = "${var.iam_instance_profile}"
-  associate_public_ip_address = "${var.associate_public_ip_address}"
   protect_termination         = "${var.protect_termination}"
   
 }

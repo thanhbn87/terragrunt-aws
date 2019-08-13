@@ -27,7 +27,6 @@ variable "ebs_optimized" { default = true }
 variable "key_name" { default = "" }
 variable "subnet_id" { default = "" }
 variable "iam_instance_profile" { default = "" }
-variable "associate_public_ip_address" { default = false }
 variable "protect_termination" { default = true }
 
 variable "dns_private" { default = false }
