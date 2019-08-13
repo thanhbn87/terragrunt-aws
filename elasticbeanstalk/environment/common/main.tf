@@ -20,6 +20,7 @@ locals {
 
   webapp_subnets = [ "${split(",", var.webapp_in_public ? join(",", data.terraform_remote_state.vpc.public_subnets) : join(",", data.terraform_remote_state.vpc.private_subnets))}" ]
   app_name = "${var.app_name == "" ? "${lower(var.namespace)}-${lower(var.project_env_short)}-${lower(var.project_name)}-${lower(var.name)}" : "${lower(var.namespace)}-${lower(var.project_env_short)}-${lower(var.project_name)}-${lower(var.app_name)}" }"
+  cf_ttl   = "${var.cf_proxied ? 1 : var.cf_ttl }"
   
 }
 
@@ -168,6 +169,6 @@ resource "cloudflare_record" "eb_env" {
   name    = "${element(var.sub_dns_names,count.index) == "" ? "@" : "${element(var.sub_dns_names,count.index)}" }"
   value   = "${module.eb_env.elb_dns_name}"
   type    = "CNAME"
-  ttl     = "${var.cf_ttl}"
+  ttl     = "${local.cf_ttl}"
   proxied = "${var.cf_proxied}"
 }
