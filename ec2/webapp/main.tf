@@ -90,5 +90,5 @@ resource "aws_route53_record" "ec2" {
   name    = "${var.namespace == "" ? "" : "${lower(var.namespace)}-"}${lower(var.project_env_short)}-.${var.domain_local}"
   type    = "CNAME"
   ttl     = "60"
-  records = ["${module.ec2.*.private_ips}"]
+  records = ["${module.ec2.private_ips}"]
 }
