@@ -60,7 +60,7 @@ data "aws_security_group" "ec2" {
   tags = "${var.source_ec2_sg_tags}"
 }
 
-module "ec2-webapp" {
+module "ec2" {
   source  = "thanhbn87/ec2-webapp/aws"
   version = "0.1.0"
 
@@ -79,7 +79,7 @@ module "ec2-webapp" {
   subnets                     = ["${local.subnets}"]
   iam_instance_profile        = "${var.iam_instance_profile}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
-  disable_api_termination     = "${var.protect_termination}"
+  protect_termination         = "${var.protect_termination}"
   
 }
 
