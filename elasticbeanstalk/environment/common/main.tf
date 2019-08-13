@@ -49,12 +49,13 @@ data "aws_security_group" "elb" {
 }
 
 data "aws_acm_certificate" "cert" {
-  domain   = "${var.domain_name}"
-  statuses = ["ISSUED"]
+  domain      = "${var.domain_name}"
+  statuses    = ["ISSUED"]
   most_recent = true
 }
 
 data "aws_route53_zone" "public" {
+  count        = "${var.dns_management == "route53" ? 1 : 0 }"
   name         = "${var.domain_name}"
   private_zone = false
 }
@@ -150,7 +151,7 @@ module "eb_env" {
 
 resource "aws_route53_record" "eb_env" {
   count   = "${var.dns_management == "route53" ? length(var.sub_dns_names) : 0 }"
-  zone_id = "${data.aws_route53_zone.public.id}"
+  zone_id = "${element(concat(data.aws_route53_zone.public.*.id,list("")),0)}"
   name    = "${element(var.sub_dns_names,count.index) == "" ? "${var.domain_name}" : "${element(var.sub_dns_names,count.index)}.${var.domain_name}" }"
   type    = "A"
   
