@@ -75,7 +75,7 @@ module "ec2" {
 
   key_name                    = "${local.key_name}"
   vpc_security_group_ids      = ["${data.aws_security_group.ec2.id}"]
-  subnet_id                   = ["${local.subnet_id}"]
+  subnet_id                   = "${local.subnet_id}"
   iam_instance_profile        = "${var.iam_instance_profile}"
   protect_termination         = "${var.protect_termination}"
   
