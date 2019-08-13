@@ -87,7 +87,7 @@ module "ec2" {
 resource "aws_route53_record" "ec2" {
   count   = "${var.dns_private ? var.instance_size : 0}"
   zone_id = "${data.terraform_remote_state.vpc.private_zone_id}"
-  name    = "${var.namespace == "" ? "" : "${lower(var.namespace)}-"}${lower(var.project_env_short)}-${lower(var.name)}-${format("%02d", count.index + 1).${var.domain_local}"
+  name    = "${var.namespace == "" ? "" : "${lower(var.namespace)}-"}${lower(var.project_env_short)}-${lower(var.name)}-${format("%02d", count.index + 1)}.${var.domain_local}"
   type    = "A"
   ttl     = "60"
   records = ["${module.ec2.private_ips}"]
