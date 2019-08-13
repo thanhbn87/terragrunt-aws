@@ -52,7 +52,7 @@ locals {
   }
 
   subnets  = [ "${split(",", var.in_public ? join(",", data.terraform_remote_state.vpc.public_subnets) : join(",", data.terraform_remote_state.vpc.private_subnets))}" ]
-  key_name = "${var.key_name == "" ? data.aws_security_group.ec2.key_name : var.key_name }"
+  key_name = "${var.key_name == "" ? data.terraform_remote_state.vpc.key_name : var.key_name }"
   ami      = "${var.ami == "" ? data.aws_ami.amazon2.id : var.ami }"
 }
 
