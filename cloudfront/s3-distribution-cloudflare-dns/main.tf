@@ -24,6 +24,7 @@ locals {
     Name = "${var.project_name}"
   }
 
+  aliases = [ "${split(",", length(var.aliases) == 0 ? join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)) : join(",", var.aliases))}" ]
   cf_ttl = "${var.cf_proxied ? 1 : var.cf_ttl }"
 }
 
@@ -47,7 +48,7 @@ resource "aws_cloudfront_distribution" "this" {
   price_class         = "${var.price_class}"
   is_ipv6_enabled     = "${var.is_ipv6_enabled}"
   default_root_object = "${var.default_root_object}"
-  aliases             = "${var.aliases}"
+  aliases             = ["${local.aliases}"]
   tags                = "${merge(local.common_tags, var.tags)}"
 
   origin {
