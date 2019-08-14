@@ -126,7 +126,7 @@ resource "aws_s3_bucket_policy" "this" {
 
 /// DNS setting:
 resource "cloudflare_record" "this" {
-  count   = "${length(var.sub_dns_names)"
+  count   = "${length(var.sub_dns_names)}"
   domain  = "${var.root_domain}"
   name    = "${element(var.sub_dns_names,count.index) == "" ? "@" : "${element(var.sub_dns_names,count.index)}" }"
   value   = "${aws_cloudfront_distribution.this.domain_name}"
