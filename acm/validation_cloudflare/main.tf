@@ -44,5 +44,5 @@ resource "cloudflare_record" "cert_validation" {
 resource "aws_acm_certificate_validation" "cert" {
   count  = "${var.cloudflare_record ? 1 : 0}"
   certificate_arn         = "${aws_acm_certificate.cert.arn}"
-  validation_record_fqdns = ["${cloudflare_record.cert_validation.hostname}"]
+  validation_record_fqdns = ["${cloudflare_record.cert_validation.*.hostname}"]
 }
