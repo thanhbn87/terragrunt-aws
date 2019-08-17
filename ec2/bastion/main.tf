@@ -64,7 +64,7 @@ module "ec2" {
   source  = "thanhbn87/ec2-bastion/aws"
   version = "0.1.1"
 
-  name          = "${lower(var,project_env_short)}-${var.name}"
+  name          = "${lower(var.project_env_short)}-${var.name}"
   namespace     = "${var.namespace}"
   instance_type = "${var.instance_type}"
   ami           = "${local.ami}"
