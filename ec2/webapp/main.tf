@@ -57,7 +57,7 @@ locals {
 }
 
 data "aws_security_group" "ec2" {
-  tags = "${var.source_ec2_sg_tags}"
+  tags = "${merge(var.source_ec2_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 module "ec2" {
@@ -65,7 +65,7 @@ module "ec2" {
   version = "0.1.0"
 
   count         = "${var.instance_size}"
-  name          = "${var.name}"
+  name          = "${lower(var.project_env_short)}-${var.name}"
   namespace     = "${var.namespace}"
   instance_type = "${var.instance_type}"
   ami           = "${local.ami}"
