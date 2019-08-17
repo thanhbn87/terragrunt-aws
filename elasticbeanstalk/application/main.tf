@@ -18,7 +18,7 @@ module "eb-app" {
   source  = "cloudposse/elastic-beanstalk-application/aws"
   version = "0.1.6"
 
-  name        = "${lower(var.project_name)}-${lower(var.name)}"
+  name        = "${lower(var.name)}"
   description = "${var.description}"
   stage       = "${lower(var.project_env_short)}"
   namespace   = "${var.namespace}"
