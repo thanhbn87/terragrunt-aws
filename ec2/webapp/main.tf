@@ -65,7 +65,7 @@ module "ec2" {
   version = "0.1.1"
 
   count         = "${var.instance_size}"
-  name          = "${lower(var.project_env_short)}-${var.name}"
+  name          = "${var.name}"
   namespace     = "${var.namespace}"
   instance_type = "${var.instance_type}"
   ami           = "${local.ami}"
