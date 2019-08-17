@@ -20,7 +20,7 @@ data "terraform_remote_state" "vpc" {
 }
 
 data "aws_security_group" "db" {
-  tags = ${merge(var.source_db_sg_tags, map("Env", "${var.project_env}"))}
+  tags = "${merge(var.source_db_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 locals {
