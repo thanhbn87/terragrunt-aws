@@ -40,15 +40,15 @@ data "terraform_remote_state" "vpc" {
 }
 
 data "aws_security_group" "ec2" {
-  tags = "${var.source_ec2_sg_tags}"
+  tags = "${merge(var.source_ec2_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 data "aws_security_group" "bastion" {
-  tags = "${var.source_bastion_sg_tags}"
+  tags = "${merge(var.source_bastion_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 data "aws_security_group" "elb" {
-  tags = "${var.source_elb_sg_tags}"
+  tags = "${merge(var.source_elb_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 data "aws_acm_certificate" "cert" {
