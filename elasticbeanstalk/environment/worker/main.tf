@@ -66,7 +66,7 @@ data "aws_route53_zone" "public" {
 module "eb_env" {
   source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=common-worker"
 
-  name        = "${lower(var.project_name)}-${lower(var.name)}"
+  name        = "${lower(var.name)}"
   description = "${var.description}"
   stage       = "${lower(var.project_env_short)}"
   namespace   = "${var.namespace}"
