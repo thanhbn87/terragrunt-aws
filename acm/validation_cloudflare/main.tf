@@ -33,7 +33,7 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "cloudflare_record" "cert_validation" {
-  count  = "${var.cloudflare_record ? 1 : 0}"
+  count  = "${var.cloudflare_record ? "${length(var.subject_alternative_names) == 0 ? 1 : length(var.subject_alternative_names)}" : 0}"
   domain = "${var.root_domain}"
   name   = "${aws_acm_certificate.cert.domain_validation_options.0.resource_record_name}"
   value  = "${aws_acm_certificate.cert.domain_validation_options.0.resource_record_value}"
