@@ -68,7 +68,7 @@ module "aurora" {
   cluster_size    = "${var.db_cluster_size}"
   namespace       = "${var.namespace}"
   stage           = "${var.project_env_short}"
-  name            = "${lower(var.project_name)}"
+  name            = "${var.name == "" ? lower(var.project_name) : lower(var.name)}"
   admin_user      = "${var.db_user}"
   admin_password  = "${var.db_password}"
   db_name         = "${var.db_name}"
