@@ -23,6 +23,7 @@ data "terraform_remote_state" "vpc" {
 
 data "aws_security_group" "cache" {
   tags = "${var.source_sg_tags}"
+  tags = "${merge(var.source_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 locals {
@@ -39,7 +40,7 @@ module "redis" {
 
   namespace       = "${var.namespace}"
   stage           = "${var.project_env_short}"
-  name            = "${lower(var.project_name)}"
+  name            = "${var.name == "" ? lower(var.project_name) : lower(var.name)}"
 
   engine_version  = "${var.redis_version}"
   family          = "${var.redis_family}"
