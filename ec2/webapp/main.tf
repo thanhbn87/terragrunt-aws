@@ -62,7 +62,7 @@ data "aws_security_group" "ec2" {
 
 module "ec2" {
   source  = "thanhbn87/ec2-webapp/aws"
-  version = "0.1.0"
+  version = "0.1.1"
 
   count         = "${var.instance_size}"
   name          = "${lower(var.project_env_short)}-${var.name}"
