@@ -68,6 +68,7 @@ module "ec2" {
   namespace     = "${var.namespace}"
   instance_type = "${var.instance_type}"
   ami           = "${local.ami}"
+  project_env   = "${var.project_env}"
 
   delete_on_termination = "${var.delete_on_termination}"
   volume_size           = "${var.volume_size}"
