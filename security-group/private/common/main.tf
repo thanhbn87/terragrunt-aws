@@ -14,7 +14,7 @@ data "aws_vpc" "vpc" {
 }
 
 data "aws_security_group" "source_sg" {
-  tags = "${merge(var.source_sg_tags, map("Env", "${var.project_env}"))}""
+  tags = "${merge(var.source_sg_tags, map("Env", "${var.project_env}"))}"
 }
 
 locals {
