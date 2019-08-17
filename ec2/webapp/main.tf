@@ -69,6 +69,7 @@ module "ec2" {
   namespace     = "${var.namespace}"
   instance_type = "${var.instance_type}"
   ami           = "${local.ami}"
+  project_env   = "${var.project_env}"
 
   delete_on_termination = "${var.delete_on_termination}"
   volume_size           = "${var.volume_size}"
@@ -90,5 +91,5 @@ resource "aws_route53_record" "ec2" {
   name    = "${var.namespace == "" ? "" : "${lower(var.namespace)}-"}${lower(var.project_env_short)}-${lower(var.project_name)}-${lower(var.name)}-${format("%02d", count.index + 1)}.${var.domain_local}"
   type    = "A"
   ttl     = "60"
-  records = ["${module.ec2.private_ips}"]
+  records = ["${element(module.ec2.private_ips,count.index)}"]
 }
