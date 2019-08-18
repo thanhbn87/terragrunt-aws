@@ -19,7 +19,7 @@ locals {
   }
 
   subject_name              = "${var.subject_name == "" ? var.domain_name : var.subject_name }"
-  subject_alternative_names = [ "${split(",", length(var.subject_alternative_names) == 0 ? join(",", list("*.${var.domain_name}")) : join(",", var.subject_alternative_names))}" ]
+  subject_alternative_names = [ "${split(",", length(var.sub_dns_names) == 0 ? join(",", list("*.${local.subject_name}")) : join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)))}" ]
 }
 
 ///////////////////////////////////
@@ -33,7 +33,7 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "cloudflare_record" "cert_validation" {
-  count  = "${var.cloudflare_record ? "${length(var.subject_alternative_names) == 0 ? 1 : length(var.subject_alternative_names)+1 }" : 0}"
+  count  = "${var.cloudflare_record ? length(var.subject_alternative_names)+1 : 0}"
   domain = "${var.root_domain}"
   name   = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_name")}"
   value  = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}"
