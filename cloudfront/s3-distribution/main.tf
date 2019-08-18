@@ -18,6 +18,8 @@ locals {
     Env  = "${var.project_env}"
     Name = "${var.project_name}"
   }
+
+  cert_domain = "${var.cert_domain == "" ? var.domain_name : var.cert_domain }"
 }
 
 data "aws_s3_bucket" "this" {
@@ -26,7 +28,7 @@ data "aws_s3_bucket" "this" {
 }
 
 data "aws_acm_certificate" "this" {
-  domain   = "${var.domain_name}"
+  domain   = "${var.cert_domain}"
   statuses = ["ISSUED"]
   most_recent = true
 }

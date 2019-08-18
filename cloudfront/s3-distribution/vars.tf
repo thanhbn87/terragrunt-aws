@@ -6,6 +6,7 @@ variable "aws_region" { default = "us-west-2" }
 variable "aws_profile" { default = "default" }
 
 variable "domain_name" { default = "example.com" }
+variable "cert_domain" { default = "" }
 variable "s3_type" { default = "asset" }
 variable "s3_bucket" { default = "" }
 
