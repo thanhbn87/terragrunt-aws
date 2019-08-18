@@ -36,7 +36,7 @@ resource "cloudflare_record" "cert_validation" {
   count  = "${var.cloudflare_record ? length(var.sub_dns_names)+1 : 0}"
   domain = "${var.root_domain}"
   name   = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_name")}"
-  value  = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}"
+  value  = "${substr("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}", -1, -1) == "." ? substr("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}", 0, length("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}")-1) : "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}"}"
   type   = "CNAME"
   ttl    = 1
 }
