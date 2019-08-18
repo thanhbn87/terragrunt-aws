@@ -28,7 +28,7 @@ locals {
 ///////////////////////////////////
 resource "aws_acm_certificate" "cert" {
   domain_name = "${local.subject_name}"
-  subject_alternative_names = ["${local.subject_alternative_names}"]
+  subject_alternative_names = ["${compact(local.subject_alternative_names)}"]
   validation_method = "DNS"
   tags = "${merge(local.common_tags, var.tags)}"
 }
