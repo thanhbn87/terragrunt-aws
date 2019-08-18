@@ -12,6 +12,7 @@ variable "source_elb_sg_tags" { default = { Type = "ALB" } }
 
 variable "domain_name" { default = "example.com" }
 variable "root_domain" { default = "example.com" }
+variable "cert_domain" { default = "" }
 variable "sub_dns_names" { default = ["www"] }
 variable "dns_management" {
   default = "route53"

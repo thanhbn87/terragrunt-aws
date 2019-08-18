@@ -23,6 +23,7 @@ locals {
   app_name_notempty = "${var.namespace == "" ? "" : "${lower(var.namespace)}-"}${lower(var.project_env_short)}-${lower(var.app_name)}"
   app_name          = "${var.app_name == "" ? local.app_name_empty : local.app_name_notempty }"
   cf_ttl            = "${var.cf_proxied ? 1 : var.cf_ttl }"
+  cert_domain       = "${var.cert_domain == "" ? var.domain_name : var.cert_domain }"
   
 }
 
@@ -52,7 +53,7 @@ data "aws_security_group" "elb" {
 }
 
 data "aws_acm_certificate" "cert" {
-  domain      = "${var.domain_name}"
+  domain      = "${local.cert_domain}"
   statuses    = ["ISSUED"]
   most_recent = true
 }
