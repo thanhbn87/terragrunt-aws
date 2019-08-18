@@ -13,9 +13,10 @@ terraform {
 }
 
 locals {
+  namespace   = "${var.namespace == "" ? lower(var.project_name) : lower(var.namespace)}"
   common_tags = {
     Env  = "${var.project_env}"
-    Name = "${var.project_env}-${var.project_name}"
+    Name = "${lower(var.project_env)}-${local.namespace}"
   }
 
   subject_name = "${var.subject_name == "" ? var.domain_name : var.subject_name }"
