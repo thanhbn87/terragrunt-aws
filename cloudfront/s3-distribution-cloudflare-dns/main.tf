@@ -24,8 +24,9 @@ locals {
     Name = "${var.project_name}"
   }
 
-  aliases = [ "${split(",", length(var.aliases) == 0 ? join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)) : join(",", var.aliases))}" ]
-  cf_ttl = "${var.cf_proxied ? 1 : var.cf_ttl }"
+  aliases     = [ "${split(",", length(var.aliases) == 0 ? join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)) : join(",", var.aliases))}" ]
+  cf_ttl      = "${var.cf_proxied ? 1 : var.cf_ttl }"
+  cert_domain = "${var.cert_domain == "" ? "${length(var.sub_dns_names) == 0 ? var.domain_name : "${element(var.sub_dns_names,0).${var.root_domain}}"}" : var.cert_domain}"
 }
 
 data "aws_s3_bucket" "this" {
@@ -34,7 +35,7 @@ data "aws_s3_bucket" "this" {
 }
 
 data "aws_acm_certificate" "this" {
-  domain   = "${var.domain_name}"
+  domain   = "${local.cert_domain}"
   statuses = ["ISSUED"]
   most_recent = true
 }
