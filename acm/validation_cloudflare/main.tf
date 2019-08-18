@@ -18,8 +18,9 @@ locals {
     Name = "${var.project_env}-${var.project_name}"
   }
 
-  subject_name              = "${var.subject_name == "" ? var.domain_name : var.subject_name }"
-  subject_alternative_names = [ "${split(",", length(var.sub_dns_names) == 0 ? join(",", list("*.${local.subject_name}")) : join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)))}" ]
+  subject_name = "${var.subject_name == "" ? var.domain_name : var.subject_name }"
+  sj_alt_names = [ "${split(",", length(var.sub_dns_names) == 0 ? join(",", list("*.${local.subject_name}")) : join(",", formatlist("%s.${var.root_domain}", var.sub_dns_names)))}" ]
+  subject_alternative_names = [ "${split(",", var.just_one_name ? join(",", list("")) : join(",", local.sj_alt_names))}" ]
 }
 
 ///////////////////////////////////

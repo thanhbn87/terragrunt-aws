@@ -11,6 +11,7 @@ variable "domain_name" { default = "example.com" }
 variable "root_domain" { default = "example.com" }
 variable "subject_name" { default = "" }
 variable "sub_dns_names" { default = [] }
+variable "just_one_name" { default = false }
 variable "cdn_cert" { default = false }
 variable "cloudflare_record" { default = true }
 
