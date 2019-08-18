@@ -36,8 +36,8 @@ resource "aws_acm_certificate" "cert" {
 resource "cloudflare_record" "cert_validation" {
   count  = "${var.cloudflare_record ? length(local.subject_alternative_names)+1 : 0}"
   domain = "${var.root_domain}"
-  name   = "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_name")}"
-  value  = "${substr("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}", -1, -1) == "." ? substr("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}", 0, length("${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}")-1) : "${lookup(aws_acm_certificate.cert.domain_validation_options[count.index],"resource_record_value")}"}"
+  name   = "${lookup(element(aws_acm_certificate.cert.domain_validation_options,count.index),"resource_record_name")}"
+  value  = "${substr("${lookup(element(aws_acm_certificate.cert.domain_validation_options,count.index),"resource_record_value")}", -1, -1) == "." ? substr("${lookup(element(aws_acm_certificate.cert.domain_validation_options,count.index),"resource_record_value")}", 0, length("${lookup(element(aws_acm_certificate.cert.domain_validation_options,count.index),"resource_record_value")}")-1) : "${lookup(element(aws_acm_certificate.cert.domain_validation_options,count.index),"resource_record_value")}"}"
   type   = "CNAME"
   ttl    = 1
 }
