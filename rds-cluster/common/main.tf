@@ -104,7 +104,7 @@ module "aurora" {
 resource "aws_route53_record" "db_writer" {
   count   = "${var.dns_private ? 1 : 0}"
   zone_id = "${data.terraform_remote_state.vpc.private_zone_id}"
-  name    = "${var.namespace == "" ? "" : "${var.namespace}-"}${lower(var.project_env_short)}-rds-writer.${var.domain_local}"
+  name    = "${var.namespace == "" ? "" : "${var.namespace}-"}${lower(var.project_env_short)}-rds-"${var.name == "" ? "" : "${lower(var.name)}-"}"writer.${var.domain_local}"
   type    = "CNAME"
   ttl     = "60"
   records = ["${module.aurora.endpoint}"]
