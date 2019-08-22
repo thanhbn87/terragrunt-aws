@@ -113,7 +113,7 @@ resource "aws_route53_record" "db_writer" {
 resource "aws_route53_record" "db_reader" {
   count   = "${var.dns_private ? 1 : 0}"
   zone_id = "${data.terraform_remote_state.vpc.private_zone_id}"
-  name    = "${var.namespace == "" ? "" : "${var.namespace}-"}${lower(var.project_env_short)}-rds-reader.${var.domain_local}"
+  name    = "${var.namespace == "" ? "" : "${var.namespace}-"}${lower(var.project_env_short)}-rds-${var.name == "" ? "" : "${lower(var.name)}-"}reader.${var.domain_local}"
   type    = "CNAME"
   ttl     = "60"
   records = ["${module.aurora.reader_endpoint}"]
