@@ -28,7 +28,7 @@ data "aws_s3_bucket" "this" {
 }
 
 data "aws_acm_certificate" "this" {
-  domain   = "${var.cert_domain}"
+  domain   = "${local.cert_domain}"
   statuses = ["ISSUED"]
   most_recent = true
 }
