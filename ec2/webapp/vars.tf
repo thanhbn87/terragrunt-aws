@@ -33,3 +33,6 @@ variable "protect_termination" { default = true }
 
 variable "dns_private" { default = false }
 variable "domain_local" { default = "local" }
+
+// CloudWatch:
+variable "ec2_autorecover" { default = true }

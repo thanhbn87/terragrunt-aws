@@ -62,7 +62,7 @@ data "aws_security_group" "ec2" {
 
 module "ec2" {
   source  = "thanhbn87/ec2-webapp/aws"
-  version = "0.1.1"
+  version = "0.1.2"
 
   count         = "${var.instance_size}"
   name          = "${var.name}"
@@ -71,6 +71,7 @@ module "ec2" {
   ami           = "${local.ami}"
   project_env   = "${var.project_env}"
   project_env_short   = "${var.project_env_short}"
+  ec2_autorecover     = "${var.ec2_autorecover}"
 
   delete_on_termination = "${var.delete_on_termination}"
   volume_size           = "${var.volume_size}"
