@@ -62,7 +62,7 @@ data "aws_security_group" "ec2" {
 
 module "ec2" {
   source  = "thanhbn87/ec2-bastion/aws"
-  version = "0.1.1"
+  version = "0.1.2"
 
   name          = "${lower(var.project_env_short)}-${var.name}"
   namespace     = "${var.namespace}"
