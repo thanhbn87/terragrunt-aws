@@ -32,6 +32,12 @@ variable "tfstate_key_vpc" { default = "demo/vpc/terraform.tfstate" }
 variable "webapp_in_public" { default = false }
 variable "app_name" { default = "" }
 
+variable "temp_file_assumerole" { default = "" }
+variable "temp_file_policy" { default = "" }
+variable "iam_instance_profile" { default = "" }
+variable "service_name" { default = "" }
+variable "ssm_enabled" { default = true }
+
 ## from: https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment/blob/0.13.0/variables.tf
 variable "namespace" {
   type        = "string"

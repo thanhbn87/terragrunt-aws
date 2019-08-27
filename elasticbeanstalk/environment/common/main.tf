@@ -65,7 +65,7 @@ data "aws_route53_zone" "public" {
 }
 
 module "eb_env" {
-  source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=common"
+  source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=0.13.2"
 
   name        = "${lower(var.name)}"
   description = "${var.description}"
@@ -75,6 +75,13 @@ module "eb_env" {
   zone_id     = "${var.zone_id}"
   app         = "${local.app_name}"
   tier        = "${var.tier}"
+
+  ## IAM:
+  temp_file_assumerole       = "${var.temp_file_assumerole}"
+  temp_file_policy           = "${var.temp_file_policy}"
+  iam_instance_profile       = "${var.iam_instance_profile}"
+  service_name               = "${var.service_name}"
+  ssm_enabled                = "${var.ssm_enabled}"
 
   ## Software:
   solution_stack_name                = "${var.solution_stack_name}"
