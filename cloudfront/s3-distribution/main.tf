@@ -28,6 +28,7 @@ data "aws_s3_bucket" "this" {
 }
 
 data "aws_acm_certificate" "this" {
+  count    = "${var.cert_enabled ? 1 : 0}"
   domain   = "${local.cert_domain}"
   statuses = ["ISSUED"]
   most_recent = true
@@ -82,7 +83,7 @@ resource "aws_cloudfront_distribution" "this" {
 
   viewer_certificate {
     cloudfront_default_certificate = "${var.cloudfront_default_certificate}"
-    acm_certificate_arn            = "${data.aws_acm_certificate.this.arn}"
+    acm_certificate_arn            = "${var.cert_enabled ? element(concat(data.aws_acm_certificate.this.*.arn,list("")),0) : ""}"
     ssl_support_method             = "${var.ssl_support_method}"
     minimum_protocol_version       = "${var.minimum_protocol_version}"
   }
