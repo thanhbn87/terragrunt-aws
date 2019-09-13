@@ -54,9 +54,7 @@ data "aws_route53_zone" "public" {
 }
 
 module "eb_env" {
-  #source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=0.13.2"
-  source = "/home/thanhbn/WorkSpace/myRepos/myGithub//terraform-aws-elastic-beanstalk-environment"
-  
+  source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=common-nlb"
 
   name        = "${lower(var.name)}"
   description = "${var.description}"
