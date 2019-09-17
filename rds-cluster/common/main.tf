@@ -46,13 +46,13 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 }
 
 resource "aws_iam_role" "enhanced_monitoring" {
-  count              = "${var.db_enhanced_monitoring ? 1 : 0}"
+  count              = "${var.db_enhanced_monitoring && var.rds_monitoring_role_arn == "" ? 1 : 0}"
   name               = "rds-monitoring-role"
   assume_role_policy = "${data.aws_iam_policy_document.enhanced_monitoring.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
-  count      = "${var.db_enhanced_monitoring ? 1 : 0}"
+  count      = "${var.db_enhanced_monitoring && var.rds_monitoring_role_arn == "" ? 1 : 0}"
   role       = "${aws_iam_role.enhanced_monitoring.name}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
