@@ -51,7 +51,8 @@ locals {
     Name = "${var.project_name}"
   }
 
-  subnets  = [ "${split(",", var.in_public ? join(",", data.terraform_remote_state.vpc.public_subnets) : join(",", data.terraform_remote_state.vpc.private_subnets))}" ]
+  dynamic_subnets  = [ "${split(",", var.in_public ? join(",", data.terraform_remote_state.vpc.public_subnets) : join(",", data.terraform_remote_state.vpc.private_subnets))}" ]
+  subnets          = [ "${split(",", length(var.subnets) == 0 ? join(",", local.dynamic_subnets) : join(",", var.subnets)" ]
   key_name = "${var.key_name == "" ? data.terraform_remote_state.vpc.key_name : var.key_name }"
   ami      = "${var.ami == "" ? data.aws_ami.amazon2.id : var.ami }"
 }
