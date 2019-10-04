@@ -244,6 +244,11 @@ variable "availability_zones" {
   description = "Choose the number of AZs for your instances"
 }
 
+variable "deploy_policy" {
+  default     = "AllAtOnce"
+  description = "DeploymentPolicy: AllAtOnce, Immutable, Rolling"
+}
+
 variable "rolling_update_type" {
   default     = "Health"
   description = "Set it to Immutable to apply the configuration change to a fresh group of instances"

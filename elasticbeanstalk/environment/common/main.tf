@@ -65,7 +65,7 @@ data "aws_route53_zone" "public" {
 }
 
 module "eb_env" {
-  source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=0.13.2"
+  source = "git::https://github.com/thanhbn87/terraform-aws-elastic-beanstalk-environment.git?ref=0.13.3"
 
   name        = "${lower(var.name)}"
   description = "${var.description}"
@@ -128,6 +128,7 @@ module "eb_env" {
   stickiness_lb_cookie_duration       = "${var.stickiness_lb_cookie_duration}"
   
   ## Rolling updates and deployments:
+  deploy_policy               = "${var.deploy_policy}"
   rolling_update_type         = "${var.rolling_update_type}"
   updating_min_in_service     = "${var.updating_min_in_service}"
   updating_max_batch          = "${var.updating_max_batch}"
