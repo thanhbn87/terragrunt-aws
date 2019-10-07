@@ -8,9 +8,9 @@ terraform {
 }
 
 locals {
+  bucket = "${var.bucket == "" ? "${lower(var.project_env_short)}-${lower(var.type)}-${lower(var.domain_name)}" : var.bucket}"
   common_tags = {
     Env  = "${var.project_env}"
-    Name = "${var.project_name}"
   }
 }
 
@@ -18,7 +18,7 @@ locals {
 //     S3    //
 ///////////////
 resource "aws_s3_bucket" "this" {
-  bucket = "${lower(var.project_env_short)}-${lower(var.type)}-${lower(var.domain_name)}"
+  bucket = "${local.bucket}"
   acl    = "${var.acl}"
   tags   = "${merge(local.common_tags, var.tags)}"
 }
