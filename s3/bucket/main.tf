@@ -21,4 +21,6 @@ resource "aws_s3_bucket" "this" {
   bucket = "${local.bucket}"
   acl    = "${var.acl}"
   tags   = "${merge(local.common_tags, var.tags)}"
+  
+  policy = "${var.policy}"
 }
