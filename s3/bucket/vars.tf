@@ -9,7 +9,12 @@ variable "bucket" { default = "" }
 variable "type" { default = "asset" }
 variable "domain_name" { default = "example.com" }
 variable "acl" { default = "private" }
-variable "policy" { default = " " }
+
+variable "policy" {
+  description = "A valid bucket policy JSON document."
+  type        = string
+  default     = null
+}
 
 variable "tags" {
   default = {}
