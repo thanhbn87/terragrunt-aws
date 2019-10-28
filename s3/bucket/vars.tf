@@ -12,8 +12,8 @@ variable "acl" { default = "private" }
 
 variable "policy" {
   description = "A valid bucket policy JSON document."
-  type        = string
-  default     = null
+  type        = "string"
+  default     = ""
 }
 
 variable "tags" {
