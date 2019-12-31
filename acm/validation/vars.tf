@@ -7,6 +7,8 @@ variable "aws_profile" { default = "default" }
 
 variable "domain_name" { default = "example.com" }
 variable "cdn_cert" { default = false }
+variable "route53_record" { default = true }
+variable "allow_overwrite" { default = true }
 
 variable "tags" {
   default = {}
