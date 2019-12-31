@@ -18,6 +18,7 @@ locals {
 //            Certs              //
 ///////////////////////////////////
 data "aws_route53_zone" "cert" {
+  count        = "${var.route53_record ? 1 : 0}"
   name         = "${var.domain_name}"
   private_zone = false
 }
