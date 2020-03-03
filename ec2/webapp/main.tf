@@ -63,7 +63,7 @@ data "aws_security_group" "ec2" {
 
 module "ec2" {
   source  = "thanhbn87/ec2-webapp/aws"
-  version = "0.1.2"
+  version = "0.1.3"
 
   count         = "${var.instance_size}"
   name          = "${var.name}"
@@ -84,6 +84,7 @@ module "ec2" {
   iam_instance_profile        = "${var.iam_instance_profile}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
   protect_termination         = "${var.protect_termination}"
+  user_data                   = "${var.user_data}"
   
 }
 

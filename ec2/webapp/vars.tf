@@ -30,6 +30,10 @@ variable "subnets" { default = [] }
 variable "iam_instance_profile" { default = "" }
 variable "associate_public_ip_address" { default = false }
 variable "protect_termination" { default = true }
+variable "user_data" {
+  description = "The user data to provide when launching the instance"
+  default     = " "
+}
 
 variable "dns_private" { default = false }
 variable "domain_local" { default = "local" }
