@@ -116,6 +116,7 @@ module "eb_env" {
   autoscale_upper_increment = "${var.autoscale_upper_increment}"
 
   ## Load balancer:
+  alb_zone_id                         = "${var.alb_zone_id}"
   loadbalancer_type                   = "${var.loadbalancer_type}"
   loadbalancer_managed_security_group = "${data.aws_security_group.elb.id}"
   loadbalancer_security_groups        = "${compact(concat(list(data.aws_security_group.elb.id),var.loadbalancer_security_groups))}"
