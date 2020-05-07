@@ -18,8 +18,8 @@ variable "dns_management" {
   default = "route53"
   description = "route53 or cloudflare"
 }
-variable "cf_email" { default = "admin@example.com" }
-variable "cf_token" { default = "yourapitokenishere" }
+variable "cf_email" {}
+variable "cf_token" {}
 variable "cf_ttl" { default = "120" }
 variable "cf_proxied" { default = false }
 
